@@ -43,6 +43,9 @@ i2c.scan()
 import xl9535_relay
 board = xl9535_relay.XL9535_KXV5(i2c, 0x20)
 
+# start with all circuits on, all relays off
+board.init()
+
 # switch relay A0 on
 board.relay(0, True)
 
