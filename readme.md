@@ -7,7 +7,7 @@ The board features a XL9535 16-bit I/O Expander with I2C Interface.
 ![demo](docs/xl9535_kxv5.jpg)
 
 
-### Installation
+## Installation
 
 Using mip via mpremote:
 
@@ -110,7 +110,7 @@ The board uses the XL9535 I/O expander as output only, and doesn't use interrupt
 Each IO pin is connected to a relay and it doesn't make sense configuring it as an input.
 
 
-### Board variants
+## Board variants
 
 There are 5 variants of this board, featuring 1,2,4,8 or 16 relays.
 
@@ -123,7 +123,7 @@ There are 5 variants of this board, featuring 1,2,4,8 or 16 relays.
 ![variants](docs/variants.jpg)
 
 
-### Relays
+## Relays
 
 The relays are Songle SRD-05VDC-SL-C with a 10A switching capacity.
 
@@ -138,7 +138,7 @@ If a relay's blue LED is off, COM is connected to NC and NO is not connected.
 ![relays](docs/relays.jpg)
 
 
-### I2C Interface
+## I2C Interface
 
 There are three address select pins (A0,A1,A2) providing addresses 0x20-0x27 for up to 8 of these devices on the I2C bus.
 
@@ -146,19 +146,19 @@ The board includes pull-up resistors on the SCL + SDA lines.
 
 Add a dab of solder to bridge the address select pads to pull A0,A1,A2 up to VCC.
 
-A0  | A1  | A2  | I2C Address
-:---|:----|:----|:-----------
--   | -   | -   | 0x20 (default)
-VCC | -   | -   | 0x21
--   | VCC | -   | 0x22
-VCC | VCC | -   | 0x23
--   | -   | VCC | 0x24
-VCC | -   | VCC | 0x25
--   | VCC | VCC | 0x26
-VCC | VCC | VCC | 0x27
+| A0  | A1  | A2  | I2C Address
+| :---|:----|:----|:-----------
+| -   | -   | -   | 0x20 (default)
+| VCC | -   | -   | 0x21
+| -   | VCC | -   | 0x22
+| VCC | VCC | -   | 0x23
+| -   | -   | VCC | 0x24
+| VCC | -   | VCC | 0x25
+| -   | VCC | VCC | 0x26
+| VCC | VCC | VCC | 0x27
 
 
-### Parts
+## Parts
 
 * [XL9535-KxV5 boards](https://s.click.aliexpress.com/e/_DnDJHmd)
 * [TinyPICO](https://www.tinypico.com/)
