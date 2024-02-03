@@ -53,7 +53,7 @@ board.relay(0, True)
 board.relay(1, True)
 
 # switch relay A2 off
-board.relay(3, False)
+board.relay(2, False)
 
 # switch relay A3 on
 board.relay(3, True)
