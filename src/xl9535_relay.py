@@ -1,3 +1,6 @@
+# SPDX-FileCopyrightText: 2024 Mike Causer <https://github.com/mcauser>
+# SPDX-License-Identifier: MIT
+
 """
 MicroPython XL9535 KxV5 Relay
 https://github.com/mcauser/micropython-xl9535-kxv5-relay
@@ -8,9 +11,6 @@ Supports variants:
 * XL9535-K4V5
 * XL9535-K8V5
 * XL9535-K16V5
-
-MIT License
-Copyright (c) 2024 Mike Causer
 """
 
 __version__ = '1.0.0'

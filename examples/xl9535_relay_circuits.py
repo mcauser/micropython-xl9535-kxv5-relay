@@ -1,3 +1,11 @@
+# SPDX-FileCopyrightText: 2024 Mike Causer <https://github.com/mcauser>
+# SPDX-License-Identifier: MIT
+
+"""
+MicroPython XL9535 KxV5 Relay
+https://github.com/mcauser/micropython-xl9535-kxv5-relay
+"""
+
 import xl9535_relay
 from machine import I2C, Pin
 
