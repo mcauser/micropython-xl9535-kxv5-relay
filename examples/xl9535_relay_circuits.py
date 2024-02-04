@@ -14,10 +14,10 @@ board = xl9535_relay.XL9535_KXV5(i2c, 0x20)
 board.init()
 
 # turn all relays on
-board.relays(0xffff)
+board.relays(0xFFFF)
 
 # turn all circuits on
-board.circuits(0xffff)
+board.circuits(0xFFFF)
 
 # turn circuit A0 off
 board.circuit(0, False)

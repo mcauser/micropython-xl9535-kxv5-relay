@@ -16,11 +16,11 @@ board.init()
 
 # turn all relays on, one-by-one
 for i in range(16):
-	board.relays(1 << i)
-	time.sleep_ms(200)
+    board.relays(1 << i)
+    time.sleep_ms(200)
 
 # turn all on
-board.relays(0xffff)
+board.relays(0xFFFF)
 time.sleep_ms(1000)
 
 # turn all off

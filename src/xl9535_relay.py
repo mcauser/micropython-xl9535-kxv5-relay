@@ -13,7 +13,7 @@ Supports variants:
 * XL9535-K16V5
 """
 
-__version__ = '1.0.0'
+__version__ = "1.0.1"
 
 # registers
 # XL9535_INPUT_PORT0 = const(0x00)
@@ -25,6 +25,7 @@ XL9535_INVERSION_PORT0 = const(0x04)
 XL9535_CONFIG_PORT0 = const(0x06)
 # XL9535_CONFIG_PORT1 = const(0x07)
 
+
 class XL9535_KXV5:
 	def __init__(self, i2c, address=0x20):
 		self._i2c = i2c
@@ -34,7 +35,7 @@ class XL9535_KXV5:
 
 	def check(self):
 		if self._i2c.scan().count(self._address) == 0:
-			raise OSError(f'XL9535 not found at I2C address {self._address:#x}')
+			raise OSError(f"XL9535 not found at I2C address {self._address:#x}")
 		return True
 
 	def init(self):
@@ -55,39 +56,37 @@ class XL9535_KXV5:
 
 	# get/set a single relay
 	def relay(self, num, value=None):
-		assert 0 <= num <= 15, 'num should be in range 0-15'
+		assert 0 <= num <= 15, "num should be in range 0-15"
 		p = num // 8
 		b = 1 << (num % 8)
 		self._i2c.readfrom_mem_into(self._address, XL9535_OUTPUT_PORT0, self._buf2)
 		if value is None:
 			# get relay status
 			return self._buf2[p] & b == b
-		else:
-			# set relay status
-			self._buf2[p] &= ~b  # unset bit
-			if value:
-				self._buf2[p] |= b  # reset bit
-			self._i2c.writeto_mem(self._address, XL9535_OUTPUT_PORT0, self._buf2)
+		# set relay status
+		self._buf2[p] &= ~b  # unset bit
+		if value:
+			self._buf2[p] |= b  # reset bit
+		self._i2c.writeto_mem(self._address, XL9535_OUTPUT_PORT0, self._buf2)
 
 	# get/set a single circuit
 	def circuit(self, num, value=None):
-		assert 0 <= num <= 15, 'num should be in range 0-15'
+		assert 0 <= num <= 15, "num should be in range 0-15"
 		p = num // 8
 		b = 1 << (num % 8)
 		self._i2c.readfrom_mem_into(self._address, XL9535_CONFIG_PORT0, self._buf2)
-		self._buf2[0] ^= 0xff
-		self._buf2[1] ^= 0xff
+		self._buf2[0] ^= 0xFF
+		self._buf2[1] ^= 0xFF
 		if value is None:
 			# get circuit status
 			return self._buf2[p] & b == b
-		else:
-			# set circuit status
-			self._buf2[p] &= ~b  # unset bit
-			if value:
-				self._buf2[p] |= b  # reset bit
-			self._buf2[0] ^= 0xff
-			self._buf2[1] ^= 0xff
-			self._i2c.writeto_mem(self._address, XL9535_CONFIG_PORT0, self._buf2)
+		# set circuit status
+		self._buf2[p] &= ~b  # unset bit
+		if value:
+			self._buf2[p] |= b  # reset bit
+		self._buf2[0] ^= 0xFF
+		self._buf2[1] ^= 0xFF
+		self._i2c.writeto_mem(self._address, XL9535_CONFIG_PORT0, self._buf2)
 
 	# get/set all relays
 	def relays(self, value=None):
@@ -95,22 +94,20 @@ class XL9535_KXV5:
 		if value is None:
 			# get all relays
 			return (self._buf2[1] << 8) | self._buf2[0]
-		else:
-			# set all relays
-			assert 0 <= value <= 65535, 'value should be in range 0-65535'
-			self._buf2[0] = value
-			self._buf2[1] = value >> 8
-			self._i2c.writeto_mem(self._address, XL9535_OUTPUT_PORT0, self._buf2)
+		# set all relays
+		assert 0 <= value <= 65535, "value should be in range 0-65535"
+		self._buf2[0] = value
+		self._buf2[1] = value >> 8
+		self._i2c.writeto_mem(self._address, XL9535_OUTPUT_PORT0, self._buf2)
 
 	# get/set all circuits
 	def circuits(self, value=None):
 		self._i2c.readfrom_mem_into(self._address, XL9535_CONFIG_PORT0, self._buf2)
 		if value is None:
 			# get all circuits
-			return ((self._buf2[1] << 8) | self._buf2[0]) ^ 0xffff
-		else:
-			# set all circuits
-			assert 0 <= value <= 65535, 'value should be in range 0-65535'
-			self._buf2[0] = value ^ 0xff
-			self._buf2[1] = (value >> 8) ^ 0xff
-			self._i2c.writeto_mem(self._address, XL9535_CONFIG_PORT0, self._buf2)
+			return ((self._buf2[1] << 8) | self._buf2[0]) ^ 0xFFFF
+		# set all circuits
+		assert 0 <= value <= 65535, "value should be in range 0-65535"
+		self._buf2[0] = value ^ 0xFF
+		self._buf2[1] = (value >> 8) ^ 0xFF
+		self._i2c.writeto_mem(self._address, XL9535_CONFIG_PORT0, self._buf2)

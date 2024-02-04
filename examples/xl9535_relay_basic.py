@@ -36,10 +36,10 @@ board.relay(2, False)
 
 # toggle A0 a few times
 for _ in range(5):
-	board.relay(0, True)
-	time.sleep_ms(200)
-	board.relay(0, False)
-	time.sleep_ms(200)
+    board.relay(0, True)
+    time.sleep_ms(200)
+    board.relay(0, False)
+    time.sleep_ms(200)
 
 
 # turn all relays on
